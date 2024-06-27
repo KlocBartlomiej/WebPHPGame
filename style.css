@@ -4,3 +4,26 @@ body {
     background-attachment: fixed;
     background-size: 100% 100%;
 }
+
+form {
+    width: 340px;
+    height: 240px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 200px;
+    text-align: center;
+    background-color: brown;
+    border: 7px solid black;
+}
+
+.error {
+    color: white;
+}
+
+a:hover {
+    color: orange;
+}
+
+a {
+    color: white;
+}
