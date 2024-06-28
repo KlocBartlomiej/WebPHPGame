@@ -1,5 +1,11 @@
 <?php
     session_start();
+    
+    if((!isset($_POST['email'])) || !isset($_POST['password'])) {
+        header('Location: ../logowanie');
+        exit();
+    }
+
     require_once "connect.php";
 
     $connection = @new mysqli($host,$db_user,$db_password,$db_name);
@@ -20,11 +26,13 @@
             $_SESSION['email'] = $user_data['email'];
             $_SESSION['id'] = $user_data['id'];
             $result->free_result();
-            unset($_SESSION['error']);
-            header('Location: ../game_logic/village.php');
+            unset($_SESSION['error_login']);
+            $_SESSION['logged_in'] = true;
+            header('Location: get_user_data.php');
         } else {
-            $_SESSION['error'] = '<span class="error">Nieprawidłowy login lub hasło.</span>';
-            header('Location: ../index.php');
+            unset($_SESSION['logged_in']);
+            $_SESSION['error_login'] = '<span class="error">Nieprawidłowy login lub hasło.</span>';
+            header('Location: ../logowanie');
         }
     }
 

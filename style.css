@@ -20,10 +20,36 @@ form {
     color: white;
 }
 
+a {
+    text-decoration: none;
+}
+
 a:hover {
     color: orange;
 }
 
-a {
+a:link {
     color: white;
+}
+
+a:visited {
+    color: white;
+}
+
+.topBar {
+    background-color: brown;
+    border: 7px solid black;
+    padding: 5px;
+}
+
+.player {
+    float: left;
+}
+
+.resources {
+    float: left;
+}
+
+.logOut {
+    float: left;
 }

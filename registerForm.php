@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if((isset($_SESSION['logged_in'])) && ($_SESSION['logged_in'] == true) ){
+        header('Location: ./game_logic/wioska');
+        exit();
+    }
     ?>
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -23,8 +27,8 @@
         <input type="text" name="user_name" />
         <br/><br/>
         <?php
-            if(isset($_SESSION['error'])) {
-                echo $_SESSION["error"]."<br/>";
+            if(isset($_SESSION['error_register'])) {
+                echo $_SESSION["error_register"]."<br/>";
             }
         ?>
         <br/><br/>

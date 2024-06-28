@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteRule rejestracja registerForm.php
+RewriteRule logowanie index.php
+RewriteRule wioska village.php
+RewriteRule mapa map.php
+RewriteRule zasoby resources.php

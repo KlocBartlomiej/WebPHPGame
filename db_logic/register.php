@@ -1,5 +1,11 @@
 <?php
     session_start();
+    
+    if((!isset($_POST['email'])) || (!isset($_POST['password'])) || (!isset($_POST['user_name'])) ) {
+        header('Location: ../logowanie');
+        exit();
+    }
+
     require_once "connect.php";
     
     $connection = @new mysqli($host,$db_user,$db_password,$db_name);
@@ -16,11 +22,11 @@
     $sql = "SELECT * FROM $table WHERE email='$email'";
     if($result = @$connection->query($sql)) {
         if($result->num_rows > 0) {
-            $_SESSION['error'] = '<span class="error">Ten email jest już zajęty.</span>';
-            header('Location: ../registerForm.php');
+            $_SESSION['error_register'] = '<span class="error">Ten email jest już zajęty.</span>';
+            header('Location: ../rejestracja');
         } else {
             //TODO add user to the database
-            unset($_SESSION['error']);
-            header('Location: ../index.php');
+            unset($_SESSION['error_register']);
+            header('Location: ../logowanie');
         }
     }

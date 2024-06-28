@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if((isset($_SESSION['logged_in'])) && ($_SESSION['logged_in'] == true) ){
+        header('Location: ./game_logic/wioska');
+        exit();
+    }
     ?>
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -20,11 +24,11 @@
         <input type="password" name="password" />
         <br/><br/>
         <?php
-            if(isset($_SESSION['error'])) {
-                echo $_SESSION["error"]."<br/>";
+            if(isset($_SESSION['error_login'])) {
+                echo $_SESSION["error_login"]."<br/>";
             }
         ?>
-        Jeśli nie posiadasz konta, możesz stworzyć je <a href="registerForm.php">tutaj</a>.
+        Jeśli nie posiadasz konta, możesz stworzyć je <a href="rejestracja">tutaj</a>.
         <br/><br/>
         <input type="submit" value="Zaloguj się" />
     </form>
