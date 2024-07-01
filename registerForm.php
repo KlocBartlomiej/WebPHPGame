@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <form action="db_logic/register.php" method="post">
+    <form id="RegistrationForm" action="db_logic/register.php" method="post">
         <h2>Zarejestruj się</h2>
         <b>Email:</b><br/>
         <input type="text" name="email" />
@@ -28,10 +28,17 @@
         <br/>
         <b>Nazwa użytkownika:</b><br/>
         <input type="text" name="user_name" />
+        <br/>
+        <label>
+            <input type="checkbox" name="accept" />
+            <b>Akceptuję </b>
+        </label>
+        <a href="regulamin">regulamin</a>
         <br/><br/>
+        <p> <a href="logowanie">Powrót do logowania.</a></p>
         <?php
             if(isset($_SESSION['error_register'])) {
-                echo $_SESSION["error_register"]."<br/>";
+                echo "<br/>".$_SESSION["error_register"]."<br/>";
             }
         ?>
         <br/><br/>

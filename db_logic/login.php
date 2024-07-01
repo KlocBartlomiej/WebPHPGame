@@ -8,39 +8,41 @@
 
     require_once "connect.php";
 
-    $connection = @new mysqli($host,$db_user,$db_password,$db_name);
-    if ($connection->connect_error) {
-        die("Niestety nie udało się połączyć z bazą danych: ". $connection->connect_error);
-    }
-
     $table = "users";
+    $email = htmlentities($_POST['email'], ENT_QUOTES, "UTF-8");
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $email = htmlentities($email, ENT_QUOTES, "UTF-8");
-    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
-
-    if($result = @$connection->query(
-        sprintf("SELECT * FROM '$table' WHERE email='%s' AND password='%s'",
-        mysqli_real_escape_string($connection, $email),
-        mysqli_real_escape_string($connection, $password))
-    )) {
-        if($result->num_rows > 0) {
+    mysqli_report(MYSQLI_REPORT_STRICT);
+    try{
+        $connection = new mysqli($host,$db_user,$db_password,$db_name);
+        if($result = $connection->query(
+            sprintf("SELECT * FROM $table WHERE email='%s'",
+            mysqli_real_escape_string($connection, $email))
+        ) AND $result->num_rows == 1) {
             $user_data = $result->fetch_assoc();
+
+            if( password_verify($_POST['password'], $user_data['password']) == false ) {
+                unset($_SESSION['logged_in']);
+                $_SESSION['error_login'] = '<span class="error">Nieprawidłowy login lub hasło.</span>';
+                header('Location: ../logowanie');
+                exit();
+            }
+
             $_SESSION['user_name'] = $user_data['user_name'];
             $_SESSION['email'] = $user_data['email'];
             $_SESSION['id'] = $user_data['id'];
             $result->free_result();
             unset($_SESSION['error_login']);
             $_SESSION['logged_in'] = true;
-            header('Location: ../game_logic/wioska');
-            // header('Location: get_user_data.php');
+            //header('Location: ../game_logic/wioska');
+            header('Location: get_user_data.php');
         } else {
             unset($_SESSION['logged_in']);
             $_SESSION['error_login'] = '<span class="error">Nieprawidłowy login lub hasło.</span>';
             header('Location: ../logowanie');
         }
+        $connection->close();
     }
-
-    $connection->close();
+    catch(Exception $e)
+    {
+        echo '<span style="color:red"> Błąd servera. Proszę spróbować później.</span>';
+    }

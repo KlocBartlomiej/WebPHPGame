@@ -15,21 +15,21 @@
 </head>
 <body>
     
-    <form action="db_logic/login.php" method="post">
+    <form id="LoginForm" action="db_logic/login.php" method="post">
         <h2>Zaloguj się</h2>
         <b>Email:</b><br/>
         <input type="text" name="email" />
         <br/>
         <b>Hasło:</b><br/>
         <input type="password" name="password" />
-        <br/><br/>
         <?php
             if(isset($_SESSION['error_login'])) {
-                echo $_SESSION["error_login"]."<br/>";
+                echo "<br/>".$_SESSION["error_login"];
             }
         ?>
-        Jeśli nie posiadasz konta, możesz stworzyć je <a href="rejestracja">tutaj</a>.
-        <br/><br/>
+        <br/>
+        <p> Jeśli nie posiadasz konta, możesz stworzyć je <a href="rejestracja">tutaj</a>.</p>
+        <br/>
         <input type="submit" value="Zaloguj się" />
     </form>
     
