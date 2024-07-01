@@ -17,13 +17,16 @@
 
     <form action="db_logic/register.php" method="post">
         <h2>Zarejestruj się</h2>
-        <b>Email:</b>
+        <b>Email:</b><br/>
         <input type="text" name="email" />
         <br/>
-        <b>Hasło:</b>
+        <b>Hasło:</b><br/>
         <input type="password" name="password" />
         <br/>
-        <b>Nazwa użytkownika:</b>
+        <b>Powtórz hasło:</b><br/>
+        <input type="password" name="password2" />
+        <br/>
+        <b>Nazwa użytkownika:</b><br/>
         <input type="text" name="user_name" />
         <br/><br/>
         <?php

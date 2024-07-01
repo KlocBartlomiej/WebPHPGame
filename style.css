@@ -7,10 +7,10 @@ body {
 
 form {
     width: 340px;
-    height: 240px;
+    height: 300px;
     padding: 30px;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 100px;
     text-align: center;
     background-color: brown;
     border: 7px solid black;
@@ -36,20 +36,24 @@ a:visited {
     color: white;
 }
 
-.topBar {
+#topBar {
     background-color: brown;
     border: 7px solid black;
     padding: 5px;
 }
 
-.player {
+#player {
     float: left;
 }
 
-.resources {
+#resources {
     float: left;
 }
 
-.logOut {
+#links {
+    float: left;
+}
+
+#logOut {
     float: left;
 }

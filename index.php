@@ -17,10 +17,10 @@
     
     <form action="db_logic/login.php" method="post">
         <h2>Zaloguj się</h2>
-        <b>Email:</b>
+        <b>Email:</b><br/>
         <input type="text" name="email" />
         <br/>
-        <b>Hasło:</b>
+        <b>Hasło:</b><br/>
         <input type="password" name="password" />
         <br/><br/>
         <?php

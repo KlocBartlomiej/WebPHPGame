@@ -1,6 +1,6 @@
 RewriteEngine on
 RewriteRule rejestracja registerForm.php
 RewriteRule logowanie index.php
-RewriteRule wioska village.php
-RewriteRule mapa map.php
-RewriteRule zasoby resources.php
+RewriteRule wioska game_logic/village.php
+RewriteRule mapa game_logic/map.php
+RewriteRule zasoby game_logic/resources.php

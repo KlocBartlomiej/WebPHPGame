@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if((!isset($_SESSION['logged_in'])) || ($_SESSION['logged_in'] == false) ){
+    if(!isset($_SESSION['logged_in'])){
         header('Location: ../logowanie');
         exit();
     }
@@ -14,16 +14,19 @@
     <title>Jakaś gierka</title>
 </head>
 <body>
-    <div class="topBar">
-        <div class="player">
+<div id="topBar">
+        <div id="player">
             <?php
-                echo "Hello ".$_SESSION['user_name']."! | ".$_SESSION['email'];
+                echo "Hello ".$_SESSION['user_name']."! | ".$_SESSION['email']."! | ";
             ?>
         </div>
-        <div class="resources">
+        <div id="resources">
 
         </div>
-        <div class="logOut">
+        <div id="links">
+
+        </div>
+        <div id="logOut">
             <a href="log_out.php">Wyloguj</a>
         </div>
         <div style="clear:both;"></div>

@@ -18,8 +18,14 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM $table WHERE email='$email' AND password='$password'";
-    if($result = @$connection->query($sql)) {
+    $email = htmlentities($email, ENT_QUOTES, "UTF-8");
+    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
+
+    if($result = @$connection->query(
+        sprintf("SELECT * FROM '$table' WHERE email='%s' AND password='%s'",
+        mysqli_real_escape_string($connection, $email),
+        mysqli_real_escape_string($connection, $password))
+    )) {
         if($result->num_rows > 0) {
             $user_data = $result->fetch_assoc();
             $_SESSION['user_name'] = $user_data['user_name'];
@@ -28,7 +34,8 @@
             $result->free_result();
             unset($_SESSION['error_login']);
             $_SESSION['logged_in'] = true;
-            header('Location: get_user_data.php');
+            header('Location: ../game_logic/wioska');
+            // header('Location: get_user_data.php');
         } else {
             unset($_SESSION['logged_in']);
             $_SESSION['error_login'] = '<span class="error">Nieprawidłowy login lub hasło.</span>';

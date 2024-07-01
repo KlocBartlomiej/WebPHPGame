@@ -17,10 +17,18 @@
 
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $password2 = $_POST['password2'];
     $login = $_POST['user_name'];
 
-    $sql = "SELECT * FROM $table WHERE email='$email'";
-    if($result = @$connection->query($sql)) {
+    $email = htmlentities($email, ENT_QUOTES, "UTF-8");
+    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
+    $password2 = htmlentities($password2, ENT_QUOTES, "UTF-8");
+    $login = htmlentities($login, ENT_QUOTES, "UTF-8");
+
+    if($result = @$connection->query(
+        sprintf("SELECT * FROM $table WHERE email='%s'",
+        mysqli_real_escape_string($connection,$email))
+        )) {
         if($result->num_rows > 0) {
             $_SESSION['error_register'] = '<span class="error">Ten email jest już zajęty.</span>';
             header('Location: ../rejestracja');
